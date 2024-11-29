@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
+  const [counter, setCounter] = useState(8);
+  //  console.log("Peerlist")
+  //  console.log("Devtools")
+  // debugger
+
+  useEffect(() => { }, []);
+
+  const increaseCountBy1 = () => {
+    setCounter(count => count + 1)
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>COUNTER IS: {counter}</div>
+        <button onClick={increaseCountBy1}>Add</button>
+        <p>App component</p>
       </header>
+      <ErrorBoundary fallback={<h2>Error aala re! Error</h2>}>
+        <Suspense fallback="Loading...Wait kara">
+          <User name="Johnrao Doekar" />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
+}
+
+function User({ name }) {
+  return <h1>{name}</h1>
 }
 
 export default App;
